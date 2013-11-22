@@ -53,7 +53,6 @@ class Life
 				else
 				{
 					population++;
-					cout<<"Character in FredkinCell Constructor: "<<c<<endl;
 					r.push_back((new FredkinCell(true,c)));				
 				}
 			}
@@ -98,7 +97,7 @@ class Life
 				}
 			}
 
-			if(c.get_type()=='C')
+			else if(c.get_type()=='C')
 			{
 				neighbors = alive_neighbors_conway(i,j);
 				if(!((neighbors==2) || (neighbors==3)))
@@ -174,16 +173,16 @@ class Life
 
 	void display(ostream& out)
 	{
-		cout<<"Generation = "<<generation<<", Population = "<<population<<"."<<endl;
+		out<<"Generation = "<<generation<<", Population = "<<population<<"."<<endl;
 		for(int i=1; i<y+1; i++)
 		{
 			for(int j=1; j< x+1; j++)
 			{
 				_grid[i][j].display(out);
 			}
-			cout<<endl;
+			out<<endl;
 		}
-		cout<<endl;
+		out<<endl;
 	}
 };
 template<>

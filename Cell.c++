@@ -33,10 +33,8 @@ int Cell::get_age()
 }
 void Cell::mutate()
 {
-	AbstractCell* c= new ConwayCell(is_alive());
-	AbstractCell* p= get();
-	delete p;
-	
+	AbstractCell* c= new ConwayCell(true);
+
 	Handle<AbstractCell> h(c);
 	Handle<AbstractCell>* n = this;
 	*n =h;
