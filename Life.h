@@ -10,6 +10,10 @@ using namespace std;
 
 template <typename T>
 
+/**
+ * @class Life
+ * Driver class for Conway's game of Life
+ */
 class Life
 {
 	private:
@@ -20,6 +24,13 @@ class Life
 	int population;
 
 	public:
+	// --------
+	// Life
+	// --------
+	/**
+	 * Constructs a Life object, reads input file and creates *Cells
+	 * @param in an istream& to read input file
+	 */
 	Life(istream& in)
 	{
 		generation =0;
@@ -69,6 +80,14 @@ class Life
 
 	}
 
+	// --------
+	// simulate
+	// --------
+	/**
+	 * recursively simulates a round for each cell in parallel
+	 * @param i an int representing the row number of the cell
+	 * @param j an int representing the column number of the cell
+	 */
 	void simulate(int i, int j)
 	{
 		if((i==1) && (j==1))
@@ -144,6 +163,14 @@ class Life
 		return;
 	}
 
+	// --------
+	// alive_neighbors_fredkin
+	// --------
+	/**
+	 * calculates the number of neighbors of a fredkin cell
+	 * @param i an int representing the row number of the cell
+	 * @param j an int representing the column number of the cell
+	 */
 	int alive_neighbors_fredkin(int i, int j)
 	{
 		int count=0;
@@ -158,6 +185,14 @@ class Life
 		return count;
 	}
 
+	// --------
+	// alive_neighbors_conway
+	// --------
+	/**
+	 * calculates the number of neighbors of a conway cell
+	 * @param i an int representing the row number of the cell
+	 * @param j an int representing the column number of the cell
+	 */
 	int alive_neighbors_conway(int i, int j)
 	{
 		int count=alive_neighbors_fredkin(i,j);
@@ -172,6 +207,13 @@ class Life
 		return count;
 	}
 
+	// --------
+	// display
+	// --------
+	/**
+	 * displays the state of all cells on the grid
+	 * @param out an ostream& for output of the states
+	 */
 	void display(ostream& out)
 	{
 		out<<"Generation = "<<generation<<", Population = "<<population<<"."<<endl;
@@ -186,6 +228,15 @@ class Life
 		out<<endl;
 	}
 };
+
+	// --------
+	// Life<ConwayCell>
+	// --------
+	/**
+	 * Overloaded constructor for Life
+	 * Constructs a Life object, reads input file and creates ConwayCells
+	 * @param in an istream& to read input file
+	 */
 template<>
 Life<ConwayCell>::Life(istream& in)
 {
@@ -229,6 +280,15 @@ Life<ConwayCell>::Life(istream& in)
 	_grid.push_back(dummies);
 
 }
+
+	// --------
+	// Life<FredkinCell>
+	// --------
+	/**
+	 * Overloaded constructor for Life
+	 * Constructs a Life object, reads input file and creates FredkinCells
+	 * @param in an istream& to read input file
+	 */
 template<>
 Life<FredkinCell>::Life(istream& in)
 {

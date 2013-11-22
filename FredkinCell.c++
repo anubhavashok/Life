@@ -1,6 +1,9 @@
 #include "FredkinCell.h"
 #include <stdlib.h>
 
+// --------
+// FredkinCell
+// --------
 FredkinCell::FredkinCell(bool _alive, char c):AbstractCell(_alive),type('F')
 {
 		if(c!='+')
@@ -18,6 +21,9 @@ FredkinCell::FredkinCell(bool _alive, char c):AbstractCell(_alive),type('F')
 FredkinCell::FredkinCell(bool _alive):AbstractCell(_alive),age(0),type('F'){}
 FredkinCell::FredkinCell(const FredkinCell& c):AbstractCell(c.alive),age(c.age),type('F'){}
 
+// --------
+// display
+// --------
 void FredkinCell::display(ostream& out)
 {
 	if(alive)
@@ -32,10 +38,18 @@ void FredkinCell::display(ostream& out)
 		out<<"-";
 	}
 }
+
+// --------
+// kill
+// --------
 void FredkinCell::kill()
 {
 	alive =0;
 }
+
+// --------
+// revive
+// --------
 void FredkinCell::revive()
 {
 	if(alive==1)
@@ -44,14 +58,26 @@ void FredkinCell::revive()
 	}
 	alive =1;
 }
+
+// --------
+// is_alive
+// --------
 bool FredkinCell::is_alive()
 {
 	return alive;
 }
+
+// --------
+// get_type
+// --------
 char FredkinCell::get_type()
 {
 	return type;
 }
+
+// --------
+// clone
+// --------
 FredkinCell* FredkinCell::clone()
 {
 		if(age<10)
@@ -61,6 +87,10 @@ FredkinCell* FredkinCell::clone()
 		}
 		return (new FredkinCell(alive,'+'));
 }
+
+// --------
+// get_age
+// --------
 int FredkinCell::get_age()
 {
 	return age;

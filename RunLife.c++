@@ -46,25 +46,25 @@ int main () {
     // Conway Cell 109x69
     // ------------------
 
-	ofstream out("RunLife.out2");
+	//ofstream out("RunLife.out2");
     try {
-        out << "*** Life<ConwayCell> 109x69 ***" << endl;
+        cout << "*** Life<ConwayCell> 109x69 ***" << endl;
                 ifstream in("RunLifeConway.in");
                 Life<ConwayCell> l(in);
                 //grid in life is created at this point
                 for(int i=0; i< 283; i++)
                 {
                         if(i<10)
-                                l.display(out);
+                                l.display(cout);
                         l.simulate(1,1);
                 }
-                l.display(out);
+                l.display(cout);
                 for(int i=0; i<40; i++)
                         l.simulate(1,1);
-                l.display(out);
+                l.display(cout);
                 for(int i=0; i<2177; i++)
                         l.simulate(1,1);
-                l.display(out);
+                l.display(cout);
         /*
 read RunLifeConway.in // assume all Conway cells
 Simulate 283 moves.
@@ -75,6 +75,25 @@ Print the 323rd grid.
 Simulate 2177 moves.
 Print the 2500th grid.
 */
+			//Test by asm2262
+		cout << "*** Life<ConwayCell> 70x2 ***" << endl;
+			Life<ConwayCell> m(in);
+			for(int i=0; i<=5; i++)
+			{
+				m.display(cout);
+				m.simulate(1,1);
+			}
+	
+			//Test by bchean
+		cout << "*** Life<ConwayCell> 22x22 ***" << endl;
+			Life<ConwayCell> n(in);
+			for(int i=0; i<=5; i++)
+			{
+				n.display(cout);
+				n.simulate(1,1);
+			}
+			
+		
         }
     catch (const invalid_argument&) {
         assert(false);}
@@ -86,12 +105,12 @@ Print the 2500th grid.
     // ------------------
 
     try {
-        out << "*** Life<FredkinCell> 20x20 ***" << endl;
+        cout << "*** Life<FredkinCell> 20x20 ***" << endl;
                 ifstream in("RunLifeFredkin.in");
                 Life<FredkinCell> l(in);
                 for(int i=0; i<=5; i++)
                 {
-                        l.display(out);
+                        l.display(cout);
                         l.simulate(1,1);
                 }
         /*
@@ -99,6 +118,23 @@ read RunLifeFredkin.in // assume all Fredkin cells
 Simulate 5 moves.
 Print every grid (i.e. 0, 1, 2...5)
 */
+		//Test by andrews
+		cout << "*** Life<FredkinCell> 18x5 ***" << endl;
+			Life<FredkinCell> m(in);
+			for(int i=0; i<=5; i++)
+			{
+				m.display(cout);
+				m.simulate(1,1);
+			}
+		//Test by austind
+		cout << "*** Life<FredkinCell> 22x14 ***" << endl;
+			Life<FredkinCell> n(in);
+			for(int i=0; i<=5; i++)
+			{
+				n.display(cout);
+				n.simulate(1,1);
+			}
+		
         }
     catch (const invalid_argument&) {
         assert(false);}
@@ -110,12 +146,12 @@ Print every grid (i.e. 0, 1, 2...5)
     // ----------
 
     try {
-        out << "*** Life<Cell> 20x20 ***" << endl;
+        cout << "*** Life<Cell> 20x20 ***" << endl;
                 ifstream in("RunLifeCell.in");
                 Life<Cell> l(in);
                 for(int i=0; i<=5; i++)
                 {
-                        l.display(out);
+                        l.display(cout);
                         l.simulate(1,1);
                 }
         /*
@@ -123,77 +159,86 @@ read RunLifeCell.in // assume all Fredkin cells
 Simulate 5 moves.
 Print every grid (i.e. 0, 1, 2...5)
 */
-		out << "*** Life<Cell> 4x2 ***" << endl;
+		cout << "*** Life<Cell> 4x2 ***" << endl;
 				Life<Cell> m(in);
                 for(int i=0; i<=5; i++)
                 {
-                        m.display(out);
+                        m.display(cout);
                         m.simulate(1,1);
                 }
 
-		out << "*** Life<Cell> 5x5 ***" << endl;
+		cout << "*** Life<Cell> 5x5 ***" << endl;
 				Life<Cell> n(in);
                 for(int i=0; i<=5; i++)
                 {
-                        n.display(out);
+                        n.display(cout);
                         n.simulate(1,1);
                 }
 
-		out << "*** Life<Cell> 5x5 ***" << endl;
+		cout << "*** Life<Cell> 5x5 ***" << endl;
 				Life<Cell> o(in);
                 for(int i=0; i<=5; i++)
                 {
-                        o.display(out);
+                        o.display(cout);
                         o.simulate(1,1);
                 }
 
-		out << "*** Life<Cell> 30x100 ***" << endl;
+		cout << "*** Life<Cell> 30x100 ***" << endl;
 				Life<Cell> p(in);
                 for(int i=0; i<=5; i++)
                 {
-                        p.display(out);
+                        p.display(cout);
                         p.simulate(1,1);
                 }
 
-		out << "*** Life<Cell> 30x100 ***" << endl;
+		cout << "*** Life<Cell> 30x100 ***" << endl;
 				Life<Cell> q(in);
                 for(int i=0; i<=5; i++)
                 {
-                        q.display(out);
+                        q.display(cout);
                         q.simulate(1,1);
                 }
 
-		out << "*** Life<Cell> 30x100 ***" << endl;
+		cout << "*** Life<Cell> 30x100 ***" << endl;
 				Life<Cell> r(in);
                 for(int i=0; i<=5; i++)
                 {
-                        r.display(out);
+                        r.display(cout);
                         r.simulate(1,1);
                 }
 
-		out << "*** Life<Cell> 50x50 ***" << endl;
+		cout << "*** Life<Cell> 50x50 ***" << endl;
 				Life<Cell> s(in);
                 for(int i=0; i<=5; i++)
                 {
-                        s.display(out);
+                        s.display(cout);
                         s.simulate(1,1);
                 }
 
-		out << "*** Life<Cell> 20x30 ***" << endl;
+		cout << "*** Life<Cell> 20x30 ***" << endl;
 				Life<Cell> t(in);
                 for(int i=0; i<=50; i++)
                 {
 						if(i%5==0)
-                        	t.display(out);
+                        	t.display(cout);
                         t.simulate(1,1);
                 }
-		out << "*** Life<Cell> 12x20 ***" << endl;
+		cout << "*** Life<Cell> 12x20 ***" << endl;
 				Life<Cell> u(in);
                 for(int i=0; i<=10; i++)
                 {
 						if(i%2==0)
-                        	u.display(out);
+                        	u.display(cout);
                         u.simulate(1,1);
+                }
+
+		//Test by carillo
+		cout << "*** Life<Cell> 12x20 ***" << endl;
+				Life<Cell> v(in);
+                for(int i=0; i<=5; i++)
+                {
+                        v.display(cout);
+                        v.simulate(1,1);
                 }
         }
     catch (const invalid_argument&) {
