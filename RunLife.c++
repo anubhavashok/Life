@@ -86,6 +86,13 @@ int main () {
 
     try {
         cout << "*** Life<FredkinCell> 20x20 ***" << endl;
+		ifstream in("RunLifeFredkin.in");
+		Life<FredkinCell> l(in);
+		for(int i=0; i<=5; i++)
+		{
+			l.display(cout);
+			l.simulate(1,1);
+		}
         /*
         read RunLifeFredkin.in // assume all Fredkin cells
         Simulate 5 moves.
@@ -103,6 +110,13 @@ int main () {
 
     try {
         cout << "*** Life<Cell> 20x20 ***" << endl;
+		ifstream in("RunLifeCell.in");
+		Life<Cell> l(in);
+		for(int i=0; i<=5; i++)
+		{
+			l.display(cout);
+			l.simulate(1,1);
+		}
         /*
         read RunLifeCell.in // assume all Fredkin cells
         Simulate 5 moves.

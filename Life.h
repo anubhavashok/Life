@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "ConwayCell.h"
+#include "FredkinCell.h"
 using namespace std;
 
 template <typename T>
@@ -26,7 +27,7 @@ class Life
 		in >> x;
 
 		//add extra row [x +2] of dummies
-		vector<T> dummies(x+2,false);
+		vector<T> dummies(x+2,(new ConwayCell(false)));
 		_grid.push_back(dummies);
 
 		for(int i=0; i<y; i++)
@@ -34,28 +35,31 @@ class Life
 			vector<T> r;
 
 			//add start dummy
-			r.push_back(false);
+			r.push_back((new ConwayCell(false)));
 
 			for(int j =0 ; j < x; j++)
 			{
 				char c;
 				in >> c;
-				assert(c=='.'||c=='*');
 				if(c=='.')
-					r.push_back(false);
+					r.push_back((new ConwayCell(false)));
 				else if(c=='*')
 				{
 					population++;
-					r.push_back(true);
+					r.push_back((new ConwayCell(true)));
 				}
-				//else if(c=='-')
-				//	r.push_back(new FredkinCell(0));
-				//else
-				//	r.push_back(new FredkinCell(1,c));				
+				else if(c=='-')
+					r.push_back((new FredkinCell(false)));
+				else
+				{
+					population++;
+					cout<<"Character in FredkinCell Constructor: "<<c<<endl;
+					r.push_back((new FredkinCell(true,c)));				
+				}
 			}
 
 			//add end dummy
-			r.push_back(false);
+			r.push_back((new ConwayCell(false)));
 
 			_grid.push_back(r);
 		}
@@ -72,22 +76,54 @@ class Life
 			generation++;
 			population=0;
 		}
-		//cout<<"REACHED grid["<<i<<"]["<<j<<"]: ";
-		T& c = _grid[i][j];
-		bool to_kill = false;
-		bool to_revive = true;	
-		bool die = false;
-		//cout<<"Neighbors - "<<alive_neighbors_conway(i,j)<<endl;
-		if(alive_neighbors_conway(i, j) !=3)
-			die = true;
-		if((alive_neighbors_conway(i,j)==4)&&(c.is_alive()))
-		{
-				die=false;
-		}
 
-		if(! ( (i==_grid.size()-2) && (j==_grid[0].size()-2) ) )
+		T& c = _grid[i][j];
+		bool change_state = false;
+
+		if(c.is_alive())
 		{
-			if(j==_grid[0].size()-2)
+			int neighbors;
+			
+			if(c.get_type()=='F')
+			{
+				neighbors=alive_neighbors_fredkin(i,j);
+				assert(neighbors<=4);
+				if(neighbors%2==0)
+					change_state=true;
+				else
+					c.revive();
+				if(c.get_age()==2)
+				{
+					c.mutate();
+				}
+			}
+
+			if(c.get_type()=='C')
+			{
+				neighbors = alive_neighbors_conway(i,j);
+				if(!((neighbors==2) || (neighbors==3)))
+					change_state=true;
+			}
+		}		
+		else
+		{
+			if(c.get_type()=='F')
+			{
+				if(alive_neighbors_fredkin(i,j)%2==1)
+					change_state=true;
+			}
+
+			if(c.get_type()=='C')
+			{
+				if(alive_neighbors_conway(i,j)==3)
+					change_state=true;
+			}
+		}
+	
+		//next spot
+		if(! ( (i==(int)_grid.size()-2) && (j==(int)_grid[0].size()-2) ) )
+		{
+			if(j==(int)_grid[0].size()-2)
 			{
 				simulate(i+1,1);
 			}
@@ -97,11 +133,13 @@ class Life
 			}
 		}
 
-		assert(!(to_kill && to_revive));
-		if(!die)
-			c.revive();
-		else
-			c.kill();	
+		if(change_state)
+		{
+			if(c.is_alive())
+				c.kill();
+			else
+				c.revive();
+		}
 		if(c.is_alive()) population++;
 		return;
 	}
@@ -123,8 +161,6 @@ class Life
 	int alive_neighbors_conway(int i, int j)
 	{
 		int count=alive_neighbors_fredkin(i,j);
-		if(_grid[i][j].is_alive())
-			count++;
 		if(_grid[i+1][j+1].is_alive())
 			count++;
 		if(_grid[i-1][j-1].is_alive())
@@ -150,4 +186,90 @@ class Life
 		cout<<endl;
 	}
 };
+template<>
+Life<ConwayCell>::Life(istream& in)
+{
+	generation =0;
+	population=0;
+	in >> y;
+	in >> x;
+
+	//add extra row [x +2] of dummies
+	vector<ConwayCell> dummies(x+2,false);
+	_grid.push_back(dummies);
+
+	for(int i=0; i<y; i++)
+	{
+		vector<ConwayCell> r;
+
+		//add start dummy
+		r.push_back(false);
+
+		for(int j =0 ; j < x; j++)
+		{
+			char c;
+			in >> c;
+			assert(c=='.'||c=='*');
+			if(c=='.')
+				r.push_back(*(new ConwayCell(false)));
+			else if(c=='*')
+			{
+				population++;
+				r.push_back(*(new ConwayCell(true)));
+			}
+		}
+
+		//add end dummy
+		r.push_back(false);
+
+		_grid.push_back(r);
+	}
+
+	//add extra row [x +2] of dummies
+	_grid.push_back(dummies);
+
+}
+template<>
+Life<FredkinCell>::Life(istream& in)
+{
+	generation =0;
+	population=0;
+	in >> y;
+	in >> x;
+
+	//add extra row [x +2] of dummies
+	vector<FredkinCell> dummies(x+2,false);
+	_grid.push_back(dummies);
+
+	for(int i=0; i<y; i++)
+	{
+		vector<FredkinCell> r;
+
+		//add start dummy
+		r.push_back(false);
+
+		for(int j =0 ; j < x; j++)
+		{
+			char c;
+			in >> c;
+			if(c=='-')
+				r.push_back(*(new FredkinCell(false)));
+			else
+			{
+				population++;
+				r.push_back(*(new FredkinCell(true,c)));				
+			}
+		}
+
+		//add end dummy
+		r.push_back(false);
+
+		_grid.push_back(r);
+	}
+
+	//add extra row [x +2] of dummies
+	_grid.push_back(dummies);
+
+}
+
 #endif // Life_h

@@ -3,10 +3,6 @@
 Cell::Cell(AbstractCell* p):
 	Handle<AbstractCell>(p)
 {}
-void Cell::mutate()
-{
-	get()->mutate();
-}
 void Cell::kill()
 {
 	get()->kill();
@@ -23,8 +19,26 @@ bool Cell::is_alive()
 {
 	return get()->is_alive();
 }
-void Cell::clone()
+char Cell::get_type()
 {
-
+	return get()->get_type();
+}
+AbstractCell* Cell::clone()
+{
+	return get()->clone();
+}
+int Cell::get_age()
+{
+	return get()->get_age();
+}
+void Cell::mutate()
+{
+	AbstractCell* c= new ConwayCell(is_alive());
+	AbstractCell* p= get();
+	delete p;
+	
+	Handle<AbstractCell> h(c);
+	Handle<AbstractCell>* n = this;
+	*n =h;
 }
 

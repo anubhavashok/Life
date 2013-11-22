@@ -3,9 +3,12 @@
 
 #include "AbstractCell.h"
 #include <iostream>
+#include <cassert>
 using namespace std;
-class ConwayCell: AbstractCell
+class ConwayCell: public AbstractCell
 {
+	private:
+	char type;
 	public:
 	ConwayCell(bool);
 	ConwayCell(const ConwayCell& c);
@@ -13,7 +16,8 @@ class ConwayCell: AbstractCell
 	void kill();
 	void revive();
 	bool is_alive();
-	void clone();
+	char get_type();
+	ConwayCell* clone();
 	void mutate();
 };
 #endif // ConwayCell_h

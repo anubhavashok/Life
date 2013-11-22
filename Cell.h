@@ -3,16 +3,19 @@
 
 #include "Handle.h"
 #include "AbstractCell.h"
-class Cell : Handle<AbstractCell>
+#include "ConwayCell.h"
+class Cell : public Handle<AbstractCell>
 {
 	public:
 	Cell(AbstractCell*);
-	void mutate();
 	void kill();
 	void revive();
 	void display(ostream&);
 	bool is_alive();
-	void clone();
+	AbstractCell* clone();
+	char get_type();
+	void mutate();
+	int get_age();
 };
 
 #endif // Cell_h

@@ -1,13 +1,7 @@
 #include "ConwayCell.h"
 
-ConwayCell::ConwayCell(bool _alive):AbstractCell(_alive)
-{
-	//if(_alive) {cout<<"*";}
-	//else {cout<<".";}
-}
-ConwayCell::ConwayCell(const ConwayCell& c):AbstractCell(c.alive)
-{
-}
+ConwayCell::ConwayCell(bool _alive):AbstractCell(_alive),type('C'){}
+ConwayCell::ConwayCell(const ConwayCell& c):AbstractCell(c.alive),type('C'){}
 
 void ConwayCell::display(ostream& out)
 {
@@ -32,8 +26,12 @@ bool ConwayCell::is_alive()
 {
 	return alive;
 }
-void ConwayCell::clone()
+char ConwayCell::get_type()
 {
+	return type;
 }
-void ConwayCell::mutate()
-{}
+ConwayCell* ConwayCell::clone()
+{
+	return (new ConwayCell(alive));
+}
+void ConwayCell::mutate(){}
