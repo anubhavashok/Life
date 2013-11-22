@@ -1,0 +1,53 @@
+commit e71232a563863cc8ae1f6a2752fd9c5cfd8fef5b
+Author: Anubhav Ashok <anubhavashok93@gmail.com>
+Date:   Fri Nov 22 15:32:00 2013 -0600
+
+    Added acceptance tests and output file for acceptance tests
+
+commit e49e7e733214809529aed44d0680eaf7ac5d8b36
+Author: Anubhav Ashok <anubhavashok93@gmail.com>
+Date:   Fri Nov 22 03:09:50 2013 -0600
+
+    Added UML class diagram
+
+commit 5281777c586078299f05a76cb0b0017cc2c4b8a2
+Author: Anubhav Ashok <anubhavashok93@gmail.com>
+Date:   Fri Nov 22 03:09:20 2013 -0600
+
+    Added documentation
+
+commit b93e7ccbd6faca77ab632cc7b3c983f296311d8b
+Author: Anubhav Ashok <anubhavashok93@gmail.com>
+Date:   Fri Nov 22 01:05:02 2013 -0600
+
+    Added Cell.h to Life.h, All unit tests work
+
+commit 1d87b38ad0b9705ea39974f371433a25766cdf42
+Author: Anubhav Ashok <anubhavashok93@gmail.com>
+Date:   Thu Nov 21 23:49:22 2013 -0600
+
+    Fixed memory leak fixed #18
+
+commit a84a7cd87f22183adefa4cdc399e09a8dd790ea1
+Author: Anubhav Ashok <anubhavashok93@gmail.com>
+Date:   Thu Nov 21 22:59:20 2013 -0600
+
+    Fixed Cell implementation, runs properly but yet to be tested
+
+commit 9d675de529ef01f4d416ae5772b0754d05b4f1a9
+Author: Anubhav Ashok <anubhavashok93@gmail.com>
+Date:   Thu Nov 21 19:33:35 2013 -0600
+
+    FredkinCell and ConwayCell working, Cell mutation to be fixed
+
+commit 0393043912c685e9c12be13563928d1b2828e38b
+Author: Anubhav Ashok <anubhavashok93@gmail.com>
+Date:   Thu Nov 21 00:12:53 2013 -0600
+
+    Added working implementation for ConwayCell
+
+commit 6918a4496086677ff676704eec6c226e73486250
+Author: Anubhav Ashok <anubhavashok@utexas.edu>
+Date:   Mon Nov 18 16:06:29 2013 -0800
+
+    Initial commit
