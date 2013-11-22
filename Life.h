@@ -210,11 +210,11 @@ Life<ConwayCell>::Life(istream& in)
 			in >> c;
 			assert(c=='.'||c=='*');
 			if(c=='.')
-				r.push_back(*(new ConwayCell(false)));
+				r.push_back(false);
 			else if(c=='*')
 			{
 				population++;
-				r.push_back(*(new ConwayCell(true)));
+				r.push_back(true);
 			}
 		}
 
@@ -252,11 +252,15 @@ Life<FredkinCell>::Life(istream& in)
 			char c;
 			in >> c;
 			if(c=='-')
-				r.push_back(*(new FredkinCell(false)));
+				r.push_back(false);
 			else
 			{
 				population++;
-				r.push_back(*(new FredkinCell(true,c)));				
+				//done this way because vector does not acccept both arguments for the standard constructor
+				//could pass in the new to push_back and invoke copy constructor, but memory leaks that way
+				FredkinCell* f =new FredkinCell(true,c);
+				r.push_back(*f);		
+				delete f;		
 			}
 		}
 
