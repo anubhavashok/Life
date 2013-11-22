@@ -5,6 +5,7 @@
 #include <vector>
 #include "ConwayCell.h"
 #include "FredkinCell.h"
+#include "Cell.h"
 using namespace std;
 
 template <typename T>
